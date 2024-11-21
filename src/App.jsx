@@ -3,18 +3,24 @@ import './App.css'
 
 import Header from './components/Header'
 import InputSection from './components/InputSection';
+import UnitSelection from './components/UnitSelections';
+import {UNITS} from './constants';
 
 function App() {
   const [birthday, setBirthday] = useState({Day: 1, Month: 1, Year: 2000});
-  const [units, setUnits] = useState(['Seconds', 'Hours', 'Days', 'Weeks', 'Months', 'Years', 'Decades'])
+  const [selectedUnit, setSelectedUnit] = useState(UNITS[0]);
 
-  function handleBirthdayChange(area, newVal) {
+  function handleBirthdayChange(area, newDate) {
     setBirthday((prevBirthday) => {
       return {
         ...prevBirthday,
-        [area]: newVal,
+        [area]: newDate,
       };
     });
+  }
+
+  function handleUnitChange(newUnit) {
+    setSelectedUnit(newUnit);
   }
 
   return (
@@ -36,6 +42,12 @@ function App() {
         prevVal={birthday['Year']}
         onValChange={handleBirthdayChange}
       />
+      <UnitSelection
+        area='Unit'
+        options={UNITS}
+        selected={selectedUnit}
+        changeSelected={handleUnitChange}
+        />
       <h2> unit selection </h2>
       <h2> button </h2>
     </div>
