@@ -4,11 +4,14 @@ import './App.css'
 import Header from './components/Header'
 import InputSection from './components/InputSection';
 import UnitSelection from './components/UnitSelections';
+import Result from './components/Result';
 import {UNITS} from './constants';
+import { isValidDate, calculateAge } from './calcs';
 
 function App() {
   const [birthday, setBirthday] = useState({Day: 1, Month: 1, Year: 2000});
   const [selectedUnit, setSelectedUnit] = useState(UNITS[0]);
+  const [age, setAge] = useState();
 
   function handleBirthdayChange(area, newDate) {
     setBirthday((prevBirthday) => {
@@ -21,6 +24,16 @@ function App() {
 
   function handleUnitChange(newUnit) {
     setSelectedUnit(newUnit);
+  }
+
+  function handleNewCalc(){
+    const convertedDate = isValidDate(birthday['Day'], birthday['Month'], birthday['Year']);
+    setAge(calculateAge(convertedDate, selectedUnit));
+
+    console.log(age);
+
+    // console.log(isValidDate(birthday['Day'], birthday['Month'], birthday['Year']));
+    // console.log(birthday);
   }
 
   return (
@@ -48,12 +61,10 @@ function App() {
         selected={selectedUnit}
         changeSelected={handleUnitChange}
         />
-      <h2> unit selection </h2>
-      <h2> button </h2>
+        <button onClick={handleNewCalc}>Calculate Age!</button>
     </div>
     <div>
-      <h1> result </h1>
-      <h2> image </h2>
+      <Result age={age} /> 
     </div>
     </>
   )

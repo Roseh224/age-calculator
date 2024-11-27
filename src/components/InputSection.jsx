@@ -1,18 +1,11 @@
 import { useState } from 'react'
 
 export default function InputSection({area, prevVal, onValChange}){
-    const [isEditing, setIsEditing] = useState(false);
     const [value, setValue] = useState(prevVal);
-
-    // function handleEditing() {
-    //     setIsEditing((editing) => !editing);
-    //     if (isEditing){
-    //         onValChange(area, value);
-    //     }
-    // }
 
     function handleChange(event) {
         setValue(event.target.value);
+        onValChange(area, event.target.value);
     }
 
     return(
