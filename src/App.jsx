@@ -11,6 +11,7 @@ import { isValidDate, calculateAge } from './calcs';
 function App() {
   const [birthday, setBirthday] = useState({Day: 1, Month: 1, Year: 2000});
   const [selectedUnit, setSelectedUnit] = useState(UNITS[0]);
+  const [isValid, setIsValid] = useState(true);
   const [age, setAge] = useState();
 
   function handleBirthdayChange(area, newDate) {
@@ -28,12 +29,14 @@ function App() {
 
   function handleNewCalc(){
     const convertedDate = isValidDate(birthday['Day'], birthday['Month'], birthday['Year']);
-    setAge(calculateAge(convertedDate, selectedUnit));
 
-    console.log(age);
-
-    // console.log(isValidDate(birthday['Day'], birthday['Month'], birthday['Year']));
-    // console.log(birthday);
+    if (convertedDate) {
+      setIsValid(true);
+      setAge(calculateAge(convertedDate, selectedUnit));
+    }
+    else {
+      setIsValid(false);
+    }
   }
 
   return (
@@ -64,7 +67,11 @@ function App() {
         <button onClick={handleNewCalc}>Calculate Age!</button>
     </div>
     <div>
-      <Result age={age} /> 
+      {isValid ? (
+      <Result age={age} unit={selectedUnit} /> 
+      ) : (
+      <h2> The birthday you have input is not valid. Please confirm that the information provided in correct, and try again. </h2>
+      )}
     </div>
     </>
   )
