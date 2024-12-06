@@ -10,10 +10,8 @@ export default function InputSection({area, prevVal, onValChange}){
 
     return(
         <li>
-        <span>
             <label>{area}:</label>
             <input type="number" required value={value} onChange={handleChange} />
-        </span>
         </li>
     )
 }

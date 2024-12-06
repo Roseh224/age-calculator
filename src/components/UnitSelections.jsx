@@ -4,7 +4,7 @@ export default function UnitSelection({area, options, selected, changeSelected})
     }
 
     return(
-        <div>
+        <li>
             <label>{area}: </label>
             <select
                 value={selected}
@@ -19,6 +19,6 @@ export default function UnitSelection({area, options, selected, changeSelected})
                     </option>
                 ))}
             </select>
-        </div>
+        </li>
     )
 }
