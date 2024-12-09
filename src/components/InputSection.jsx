@@ -11,7 +11,7 @@ export default function InputSection({area, prevVal, onValChange}){
     return(
         <li>
             <label>{area}:</label>
-            <input type="number" required value={value} onChange={handleChange} />
+            <input className="input_box" type="number" required value={value} onChange={handleChange} />
         </li>
     )
 }

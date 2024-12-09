@@ -7,6 +7,8 @@ export default function UnitSelection({area, options, selected, changeSelected})
         <li>
             <label>{area}: </label>
             <select
+                className="input_box"
+                id="dropdown"
                 value={selected}
                 onChange={handleUnitChange}
             >
